@@ -1,0 +1,26 @@
+root@a901daf6998e:/etc/apache2/sites-available# root@a901daf6998e:/etc/apache2/sites-available# ls
+000-default.conf  default-ssl.conf  oda.onedao.me.conf
+root@a901daf6998e:/etc/apache2/sites-available# cat oda.onedao.me.conf
+<VirtualHost *:443>
+    ServerAdmin webmaster@oda.onedao.me
+    ServerName oda.onedao.me
+    DocumentRoot /var/www/html
+
+    # Enable SSL
+    SSLEngine on
+
+    # Path to the Cloudflare Origin Certificate and Key
+    SSLCertificateFile /etc/ssl/cloudflare/cloudflare.pem
+    SSLCertificateKeyFile /etc/ssl/cloudflare/cloudflare.key
+
+    # Optional: Chain file (if you have one)
+    # SSLCertificateChainFile /etc/ssl/cloudflare/cloudflare-chain.pem
+
+    # Other SSL settings (optional but recommended)
+    SSLProtocol all -SSLv2 -SSLv3
+    SSLCipherSuite HIGH:!aNULL:!MD5
+
+    # Logging
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
